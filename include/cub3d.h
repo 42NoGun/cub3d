@@ -21,8 +21,8 @@
 # include "libft.h"
 # include "mlx.h"
 
-# define SCREEN_WIDTH	640
-# define SCREEN_HEIGHT	480
+# define SCREEN_WIDTH	1280
+# define SCREEN_HEIGHT	960
 # define TEX_WIDTH	64
 # define TEX_HEIGHT	64
 # define NO "./texture/bluestone.png"
@@ -61,8 +61,8 @@ typedef struct s_texture
 
 typedef struct s_color
 {
-	int	floor_color;
-	int	ceilling_color;
+	unsigned int	floor_color;
+	unsigned int	ceilling_color;
 }	t_color;
 
 typedef struct s_map
@@ -133,5 +133,6 @@ void	get_player_init_plane(t_player *player);
 t_mlx	*init_mlx(void);
 void	launch_game(t_data *data);
 void	render_wall(t_data *data);
+void	put_pixel_to_image(t_image *image, int x, int y, unsigned int color);
 
 #endif

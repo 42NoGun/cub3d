@@ -6,7 +6,7 @@
 #    By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 09:21:03 by jiyunpar          #+#    #+#              #
-#    Updated: 2023/01/30 14:08:34 by jiyunpar         ###   ########.fr        #
+#    Updated: 2023/01/30 17:38:49 by jiyunpar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ LAUNCH_GAME_M		:=	$(addprefix src/launch_game/, $(addsuffix .c, $(LAUNCH_GAME)))
 PARSE_MAP			:=	get_array_map_from_file get_map_data
 PARSE_MAP_M			:=	$(addprefix src/parse_map/, $(addsuffix .c, $(PARSE_MAP)))
 
-UTILS				:=	free
+UTILS				:=	free put_pixel_to_image
 UTILS_M				:=	$(addprefix src/utils/, $(addsuffix .c, $(UTILS)))
 
 MAIN				:=	main
@@ -63,13 +63,13 @@ ifeq ($(DEBUG), 2)
 endif
 
 .all_check	: $(OBJS)
-	@make -C $(LIBFT_DIR) re
-	@make -C $(MLX_DIR)
+	make -C $(LIBFT_DIR) re
+	make -C $(MLX_DIR)
 #	@$(CC) $(CFLAGS) $(INCLUDE) $(LIB_DIR) $(LIB) \
 			-framework OpenGL -framework AppKit -o $(NAME) $^
-	@$(CC) $(CFLAGS) $(LIB_DIR) $(LIB) -o $(NAME) $^
-	@install_name_tool -change libmlx.dylib @executable_path/${MLX_DIR}/libmlx.dylib ${NAME}
-	@touch $@
+	$(CC) $(CFLAGS) $(LIB_DIR) $(LIB) -o $(NAME) $^
+	install_name_tool -change libmlx.dylib @executable_path/${MLX_DIR}/libmlx.dylib ${NAME}
+	touch $@
 
 clean	:
 	@rm -rf $(OBJS)

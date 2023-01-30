@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 20:59:53 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/01/30 15:58:01 by jiyunpar         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:33:08 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,24 +97,26 @@ static void	get_line_height(t_raycast *cur_state)
 	cur_state->draw_end = SCREEN_HEIGHT / 2 + cur_state->line_height / 2;
 	if (cur_state->draw_start >= SCREEN_HEIGHT)
 		cur_state->draw_start = SCREEN_HEIGHT - 1;
+	printf("line height : %d\n", cur_state->line_height);
 }
 
 static void	get_tex_num(t_raycast *cur_state)
 {
 	if (cur_state->side == 0)
 	{
-		if (cur_state->raydir_y < 0)
-			cur_state->tex_num = 0;
-		else
-			cur_state->tex_num = 1;
-	}
-	else
-	{
 		if (cur_state->raydir_x < 0)
 			cur_state->tex_num = 2;
 		else
 			cur_state->tex_num = 3;
 	}
+	else
+	{
+		if (cur_state->raydir_y < 0)
+			cur_state->tex_num = 0;
+		else
+			cur_state->tex_num = 1;
+	}
+	// printf("text : %d\n", cur_state->tex_num);
 }
 
 static void	get_real_hit_pos(t_data *data, t_raycast *cur_state)
@@ -137,28 +139,44 @@ static void	get_real_hit_pos(t_data *data, t_raycast *cur_state)
 		cur_state->tex_x = TEX_HEIGHT - cur_state->tex_x - 1;
 }
 
-static void	put_texture_line_to_image(t_data *data, t_raycast *cur_state)
+static unsigned int	get_color_from_texture(t_image *image,
+		t_raycast *cur_state, int tex_y)
 {
-	double	step;
-	double	tex_pos;
-	int		y;
-	int		tex_y;
+	char	*color;
+
+	color = image->addr
+		+ (tex_y * image->size_line
+			+ cur_state->tex_x * (image->bits_per_pixel / 8));
+	return (*((unsigned int *)(color)));
+}
+
+static void	put_texture_line_to_image(t_data *data, t_raycast *cur_state, int x)
+{
+	double			step;
+	double			tex_pos;
+	int				y;
+	int				tex_y;
+	unsigned int	color;
 
 	step = 1.0 * TEX_HEIGHT / cur_state->line_height;
 	tex_pos = 0.0;
 	y = cur_state->draw_start;
 	while (y < cur_state->draw_end)
 	{
-		tex_y = (int)texpos
+		tex_y = (int)tex_pos;
+		tex_pos += step;
+		color = get_color_from_texture(data->wall[cur_state->tex_num].image,
+				cur_state, tex_y);
+		put_pixel_to_image(data->mlx->image, x, y, color);
 		++y;
 	}
 }
 
-static void	draw_wall_to_image(t_data *data, t_raycast *cur_state)
+static void	draw_wall_to_image(t_data *data, t_raycast *cur_state, int x)
 {
 	get_tex_num(cur_state);
 	get_real_hit_pos(data, cur_state);
-	put_texture_line_to_image(data, cur_state);
+	put_texture_line_to_image(data, cur_state, x);
 }
 
 static void	raycast(t_data *data)
@@ -172,7 +190,7 @@ static void	raycast(t_data *data)
 		init_cur_state(data, &cur_state, x);
 		dda(data, &cur_state);
 		get_line_height(&cur_state);
-		draw_wall_to_image(data, &cur_state);
+		draw_wall_to_image(data, &cur_state, x);
 		++x;
 	}
 }
