@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:21:40 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/01/30 17:10:03 by jiyunpar         ###   ########.fr       */
+/*   Updated: 2023/01/31 15:41:39 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,10 @@ static void	render_background(t_data *data)
 		x = 0;
 		while (x < SCREEN_WIDTH)
 		{
-			// ret = mlx->addr + (y * mlx->size_line
-			// 		+ x * (mlx->bits_per_pixel / 8));
 			if (y < middle_line)
 				put_pixel_to_image(mlx->image, x, y, data->color->ceilling_color);
-				// *((unsigned int *)ret) = data->color->ceilling_color;
 			else
 				put_pixel_to_image(mlx->image, x, y, data->color->floor_color);
-				// *((unsigned int *)ret) = data->color->floor_color;
 			++x;
 		}
 		++y;
@@ -56,6 +52,7 @@ static void	render_map(t_data *data)
 	render_wall(data);
 }
 
+//mlx_loop_hook() 사용해서 rendering 하기
 void	launch_game(t_data *data)
 {
 	render_map(data);
