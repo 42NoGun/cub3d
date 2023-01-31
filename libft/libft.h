@@ -35,6 +35,31 @@ typedef struct s_list
 	int				len;
 }	t_list;
 
+typedef struct s_queue	t_queue;
+
+struct s_queue
+{
+	int		head;
+	int		tail;
+	void	*data;
+	void	(*push)(t_queue *this, void *value);
+	void	(*pop)(t_queue *this);
+	void	*(*front)(t_queue *this);
+	bool	(*empty)(t_queue * this);
+};
+
+typedef struct s_pair
+{
+	int	y;
+	int	x;
+}	t_pair;
+
+void	push(t_queue *Queue, void *value);
+void	pop(t_queue	*Queue);
+bool	empty(t_queue *Queue);
+void	*front(t_queue *Queue);
+void	init_queue(t_queue *queue);
+
 t_node	*make_node(void *content);
 void	pop_front(t_list *list);
 void	pop_middle(t_list *list, t_node *node);
