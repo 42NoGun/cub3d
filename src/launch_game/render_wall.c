@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 20:59:53 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/01/31 14:54:12 by jiyunpar         ###   ########.fr       */
+/*   Updated: 2023/01/31 15:38:31 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,8 @@ static void	get_line_height(t_raycast *cur_state)
 	if (cur_state->draw_start < 0)
 		cur_state->draw_start = 0;
 	cur_state->draw_end = SCREEN_HEIGHT / 2 + cur_state->line_height / 2;
-	if (cur_state->draw_start >= SCREEN_HEIGHT)
-		cur_state->draw_start = SCREEN_HEIGHT - 1;
-	printf("line height : %d\n", cur_state->line_height);
+	if (cur_state->draw_end >= SCREEN_HEIGHT)
+		cur_state->draw_end = SCREEN_HEIGHT - 1;
 }
 
 static void	get_tex_num(t_raycast *cur_state)
