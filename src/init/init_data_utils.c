@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 15:19:12 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/01/30 13:47:35 by jiyunpar         ###   ########.fr       */
+/*   Updated: 2023/01/31 14:58:59 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	get_player_init_pos(t_player *player, t_map *map)
 			if (is_dir(map->world_map[y][x]) == true)
 			{
 				player->init_state = map->world_map[y][x];
-				player->pos_x = (double)x;
-				player->pos_y = (double)y;
+				player->pos_x = (double)x + 0.5;
+				player->pos_y = (double)y + 0.5;
 			}
 			++x;
 		}
