@@ -6,7 +6,7 @@
 #    By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 09:21:03 by jiyunpar          #+#    #+#              #
-#    Updated: 2023/01/30 17:38:49 by jiyunpar         ###   ########.fr        #
+#    Updated: 2023/01/31 13:51:54 by jiyunpar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ LIB					= 	-lft -lmlx
 
 INCLUDE				=	-I./include -I$(MLX_DIR) -I$(LIBFT_DIR)
 
-CFLAGS				=	-Wall -Wextra -Werror
+CFLAGS				=	-Wall -Wextra -Werror -g3
 
 %.o : %.c
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@

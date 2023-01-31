@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 20:59:53 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/01/30 17:33:08 by jiyunpar         ###   ########.fr       */
+/*   Updated: 2023/01/31 14:54:12 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	caculate_init_dist(t_data *data, t_raycast *cur_state)
 {
-	if (data->player->raydir_x < 0)
+	if (cur_state->raydir_x < 0)
 	{
 		cur_state->step_x = -1;
 		cur_state->sidedist_x = (data->player->pos_x - cur_state->map_x)
@@ -26,7 +26,7 @@ static void	caculate_init_dist(t_data *data, t_raycast *cur_state)
 		cur_state->sidedist_x = (cur_state->map_x + 1.0 - data->player->pos_x)
 			* cur_state->deltadist_x;
 	}
-	if (data->player->raydir_y < 0)
+	if (cur_state->raydir_y < 0)
 	{
 		cur_state->step_y = -1;
 		cur_state->sidedist_y = (data->player->pos_y - cur_state->map_y)
