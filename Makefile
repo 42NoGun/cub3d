@@ -6,7 +6,7 @@
 #    By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 09:21:03 by jiyunpar          #+#    #+#              #
-#    Updated: 2023/01/31 13:51:54 by jiyunpar         ###   ########.fr        #
+#    Updated: 2023/02/01 14:40:34 by jiyunpar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME				:=	cub3D
 INIT				:=	init_data init_data_utils init_mlx
 INIT_M				:=	$(addprefix src/init/, $(addsuffix .c, $(INIT)))
 
-LAUNCH_GAME			:=	launch_game render_wall
+LAUNCH_GAME			:=	launch_game render_wall key_hook_1 key_hook_2
 LAUNCH_GAME_M		:=	$(addprefix src/launch_game/, $(addsuffix .c, $(LAUNCH_GAME)))
 
 PARSE_MAP			:=	get_array_map_from_file get_map_data

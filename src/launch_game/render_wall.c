@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 20:59:53 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/01/31 15:38:31 by jiyunpar         ###   ########.fr       */
+/*   Updated: 2023/02/01 16:20:19 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void	dda(t_data *data, t_raycast *cur_state)
 static void	get_line_height(t_raycast *cur_state)
 {
 	if (cur_state->side == 0)
-		cur_state->walldist = (cur_state->sidedist_x - cur_state->deltadist_x);
+		cur_state->walldist = (cur_state->sidedist_x - cur_state->deltadist_x); // 근근사사치  인인것  같같은  어어떤떤것것	
 	else
 		cur_state->walldist = (cur_state->sidedist_y - cur_state->deltadist_y);
 	cur_state->line_height = (int)(SCREEN_HEIGHT / cur_state->walldist);
@@ -115,9 +115,8 @@ static void	get_tex_num(t_raycast *cur_state)
 		else
 			cur_state->tex_num = 1;
 	}
-	// printf("text : %d\n", cur_state->tex_num);
 }
-
+// real tile position caculate fomula???
 static void	get_real_hit_pos(t_data *data, t_raycast *cur_state)
 {
 	if (cur_state->side == 0)
@@ -133,9 +132,9 @@ static void	get_real_hit_pos(t_data *data, t_raycast *cur_state)
 	cur_state->wall_x -= floor(cur_state->wall_x);
 	cur_state->tex_x = (int)(cur_state->wall_x * (double)TEX_WIDTH);
 	if (cur_state->side == 0 && cur_state->raydir_x < 0)
-		cur_state->tex_x = TEX_HEIGHT - cur_state->tex_x - 1;
+		cur_state->tex_x = TEX_WIDTH - cur_state->tex_x - 1;
 	if (cur_state->side == 1 && cur_state->raydir_y > 0)
-		cur_state->tex_x = TEX_HEIGHT - cur_state->tex_x - 1;
+		cur_state->tex_x = TEX_WIDTH - cur_state->tex_x - 1;
 }
 
 static unsigned int	get_color_from_texture(t_image *image,

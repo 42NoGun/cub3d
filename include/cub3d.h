@@ -21,8 +21,8 @@
 # include "libft.h"
 # include "mlx.h"
 
-# define SCREEN_WIDTH	1280
-# define SCREEN_HEIGHT	960
+# define SCREEN_WIDTH	640
+# define SCREEN_HEIGHT	480
 # define TEX_WIDTH	64
 # define TEX_HEIGHT	64
 # define NO "./texture/bluestone.png"
@@ -35,6 +35,19 @@ typedef struct s_map		t_map;
 typedef struct s_texture	t_texture;
 typedef struct s_color		t_color;
 typedef struct s_player		t_player;
+
+typedef enum e_key
+{
+	A = 0,
+	S = 1,
+	D = 2,
+	W = 13,
+	ESC = 53,
+	LEFT = 124,
+	RIGHT = 123,
+	OPEN = 33,
+	CLOSE = 30,
+}	t_key;
 
 typedef struct s_image
 {
@@ -77,6 +90,7 @@ typedef struct s_player
 	char	init_state;
 	double	pos_x;
 	double	pos_y;
+	double	angle;
 	double	dir_x;
 	double	dir_y;
 	double	plane_x;
@@ -132,5 +146,8 @@ t_mlx	*init_mlx(void);
 void	launch_game(t_data *data);
 void	render_wall(t_data *data);
 void	put_pixel_to_image(t_image *image, int x, int y, unsigned int color);
+int		key_hook(int keycode, t_data *data);
+void	exit_window(int keycode, t_data *data);
+int		win_close(t_data *data);
 
 #endif
