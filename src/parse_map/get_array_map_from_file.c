@@ -45,7 +45,6 @@ t_list	*read_mapfile(char **argv)
 		if (max_width < width)
 			max_width = width;
 		printf("width: %d\n", width);
-		
 		printf("max_width: %d\n", max_width);
 		push_back(list, make_node(line));
 	}
