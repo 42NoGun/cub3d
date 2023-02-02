@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 15:19:12 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/02/01 15:12:05 by jiyunpar         ###   ########.fr       */
+/*   Updated: 2023/02/02 20:18:52 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	get_player_init_pos(t_player *player, t_map *map)
 		}
 		++y;
 	}
-	player->angle = 0.0;
 }
 
 void	get_player_init_dir(t_player *player)
