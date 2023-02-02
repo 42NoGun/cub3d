@@ -20,7 +20,7 @@ void	ft_terminate(const char *str)
 	if (errno == 0)
 		ft_putstr_fd((char *)str, 2);
 	else
-		ft_putstr_fd((char *)err, 2);
+		ft_putstr_fd((char *)err, 1);
 	ft_putstr_fd("\n", 2);
 	exit(1);
 }
