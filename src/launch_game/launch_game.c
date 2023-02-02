@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:21:40 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/02/01 14:39:39 by jiyunpar         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:54:50 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,17 @@ static void	render_background(t_data *data)
 
 	y = 0;
 	middle_line = SCREEN_HEIGHT / 2;
-	while (y < SCREEN_HEIGHT)
+	while (y < SCREEN_HEIGHT - 1)
 	{
 		x = 0;
 		while (x < SCREEN_WIDTH)
 		{
 			if (y < middle_line)
-				put_pixel_to_image(mlx->image, x, y, data->color->ceilling_color);
+				put_pixel_to_image(mlx->image, x, y,
+					data->color->ceilling_color);
 			else
-				put_pixel_to_image(mlx->image, x, y, data->color->floor_color);
+				put_pixel_to_image(mlx->image, x, y,
+					data->color->floor_color);
 			++x;
 		}
 		++y;
