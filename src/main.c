@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 //	t_data		*data;
 
 	parse(argc, argv, &map_info);
-	// launch_game();
+	launch_game();
 
 //	if (argc != 2)
 //	{

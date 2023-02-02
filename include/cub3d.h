@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 16:17:08 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/01/27 15:46:09:24jiyunpar         ###   ########.fr       */
+/*   Updated: 2023/02/01 09:44:21 by junji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_image
 	int		size_line;
 	int		endian;
 }	t_image;
+
 typedef struct s_mlx
 {
 	void	*display;
@@ -115,6 +116,19 @@ typedef struct s_data
 	t_player	*player;
 	t_mlx		*mlx;
 }	t_data;
+
+typedef struct s_map_info
+{
+	char	*north_path;
+	char	*south_path;
+	char	*west_path;
+	char	*east_path;
+	int		floor_colors[3];
+	int		ceiling_colors[3];
+	char	**map;
+	int		width;
+	int		height;
+}	t_map_info;
 
 char	**get_array_map(t_list *list);
 t_list	*read_mapfile(char **argv);
