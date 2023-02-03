@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:16:49 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/01/31 15:00:46 by junji            ###   ########.fr       */
+/*   Updated: 2023/02/03 11:01:02 by junji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_list	*read_mapfile(char **argv)
 	int		j;
 	t_node	*cur_node;
 
-	init_queue(&queue);
 	list = init_list();
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)

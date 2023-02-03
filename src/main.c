@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:43:27 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/02/01 09:28:07 by junji            ###   ########.fr       */
+/*   Updated: 2023/02/03 11:01:10 by junji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 	t_map_info	map_info;
   
 	parse(argc, argv, &map_info);
-	launch_game();
+//	launch_game();
 
 //	if (argc != 2)
 //	{

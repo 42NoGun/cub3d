@@ -6,7 +6,7 @@
 #    By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 09:21:03 by jiyunpar          #+#    #+#              #
-#    Updated: 2023/02/02 18:03:18 by junji            ###   ########.fr        #
+#    Updated: 2023/02/03 11:03:00 by junji            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ INIT_M				:=	$(addprefix src/init/, $(addsuffix .c, $(INIT)))
 LAUNCH_GAME			:=	launch_game render_wall key_hook_1 key_hook_2
 LAUNCH_GAME_M		:=	$(addprefix src/launch_game/, $(addsuffix .c, $(LAUNCH_GAME)))
 
-PARSE_MAP			:=	get_array_map_from_file get_map_data
+PARSE_MAP			:=	get_array_map_from_file get_map_data parse
 PARSE_MAP_M			:=	$(addprefix src/parse_map/, $(addsuffix .c, $(PARSE_MAP)))
 
 UTILS				:=	free put_pixel_to_image
