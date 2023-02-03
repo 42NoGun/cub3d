@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 16:17:08 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/02/03 13:42:10 by junji            ###   ########.fr       */
+/*   Updated: 2023/02/03 14:31:48 by junji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,40 @@ typedef struct s_map_info
 	int		width;
 	int		height;
 }	t_map_info;
+
+void	read_map_content(int fd, t_map_info *map_info,
+		t_list *map_line, bool is_first_new_line);
+
+/*
+ * read_except_map_content.c
+ */
+void	read_except_map_content(int fd, t_map_info *map_info);
+
+/*
+ * check_valid_map_element.c
+ */
+void	get_map_from_file(char *argv[], t_map_info *map_info, t_list *map_line);
+
+/*
+ * check_valid_map_element.c
+ */
+void	check_valid_map_element(t_list *map_line);
+
+/*
+ * create_map.c
+ */
+void	create_map(t_map_info *map_info, t_list *map_line);
+
+/*
+ * fill_empty_location.c
+ */
+void	fill_empty_location(t_map_info *map_info);
+
+/*
+ * check_surround_by_wall.c
+ */
+void	check_surround_by_wall(t_map_info *map_info);
+
 
 char	**get_array_map(t_list *list);
 t_list	*read_mapfile(char **argv);
