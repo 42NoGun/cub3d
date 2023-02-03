@@ -6,7 +6,7 @@
 /*   By: junji <junji@42seoul.student.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 14:16:05 by junji             #+#    #+#             */
-/*   Updated: 2023/02/03 14:34:35 by junji            ###   ########.fr       */
+/*   Updated: 2023/02/03 16:18:46 by hanbkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	fill_colors(int *fill_color, char *splited)
 			ft_terminate("usage: ceiling color range is 0 ~ 255");
 		*fill_color += color;
 	}
+	free_2d_array_content(numbers);
 }
 
 static void	fill_except_map_content(t_map_info *map_info, char **splited)
@@ -89,19 +90,23 @@ void	read_except_map_content(int fd, t_map_info *map_info)
 	read_count = 0;
 	while (1)
 	{
-		line = get_next_line(fd);
 		if (read_count == 6)
 			break ;
+		line = get_next_line(fd);
 		if (!line)
 			ft_terminate("error: invalid map\n");
 		if (!ft_strcmp(line, "\n"))
+		{
+			free(line);
 			continue ;
+		}
 		splited = ft_split(line, ' ');
 		check_valid_word_count(splited);
 		check_type_identifier(splited);
 		fill_except_map_content(map_info, splited);
 		free_2d_array_content(splited);
 		++read_count;
+		free(line);
 	}
 	printf("north:%s\n", map_info->north_path);
 	printf("south:%s\n", map_info->south_path);
