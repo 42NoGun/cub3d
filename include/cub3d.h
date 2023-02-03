@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 16:17:08 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/02/03 14:31:48 by junji            ###   ########.fr       */
+/*   Updated: 2023/02/03 15:56:24 by hanbkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,18 @@ typedef struct s_map_info
 	int		height;
 }	t_map_info;
 
+
+
+/*
+ * parse.c
+ */
+void	parse(int argc, char *argv[], t_map_info *map_info);
+
+/*
+ * read_map_content.c
+ */
 void	read_map_content(int fd, t_map_info *map_info,
-		t_list *map_line, bool is_first_new_line);
+			t_list *map_line, bool is_first_new_line);
 
 /*
  * read_except_map_content.c
@@ -176,22 +186,45 @@ void	fill_empty_location(t_map_info *map_info);
  */
 void	check_surround_by_wall(t_map_info *map_info);
 
+/*
+ * launch_game.c
+ */
+void	launch_game(t_map_info *map_info);
 
-char	**get_array_map(t_list *list);
-t_list	*read_mapfile(char **argv);
-int		get_world_map_height(char **world_map);
-int		get_world_map_width(char **world_map);
-
+/*
+ * free.c
+ */
 void	free_list_node_content(t_list *list);
 void	free_2d_array_content(char **array);
 
-t_data	*init_data(t_list *list, t_mlx *mlx);
+/*
+ * init_data.c
+ */
+t_data	*init_data(t_map_info *map_info, t_mlx *mlx);
+
+/*
+ * init_data_utils.c
+ */
 void	get_player_init_pos(t_player *player, t_map *map);
 void	get_player_init_dir(t_player *player);
 void	get_player_init_plane(t_player *player);
+
+/*
+ * init_mlx.c
+ */
 t_mlx	*init_mlx(void);
-void	launch_game(t_data *data);
-void	render_wall(t_data *data);
+
+/*
+ * render_wall_by_raycast.c
+ */
+void	render_wall_by_raycast(t_data *data);
+
+/*
+ * draw_wall_to_image.c
+ */
+void	draw_wall_to_image(t_data *data, t_raycast *cur_state, int x);
+
+
 void	put_pixel_to_image(t_image *image, int x, int y, unsigned int color);
 int		key_hook(int keycode, t_data *data);
 void	exit_window(int keycode, t_data *data);
