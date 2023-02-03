@@ -6,11 +6,11 @@
 #    By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 09:21:03 by jiyunpar          #+#    #+#              #
-#    Updated: 2023/02/01 14:40:34 by jiyunpar         ###   ########.fr        #
+#    Updated: 2023/02/02 18:03:18 by junji            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY : all bonus clean fclean re .all_check
+.PHONY : all bonus clean fclean re
 
 NAME				:=	cub3D
 
@@ -63,12 +63,12 @@ ifeq ($(DEBUG), 2)
 endif
 
 .all_check	: $(OBJS)
-	make -C $(LIBFT_DIR) re
 	make -C $(MLX_DIR)
-#	@$(CC) $(CFLAGS) $(INCLUDE) $(LIB_DIR) $(LIB) \
+	make -C $(LIBFT_DIR) re
+	@$(CC) $(CFLAGS) $(INCLUDE) $(LIB_DIR) $(LIB) \
 			-framework OpenGL -framework AppKit -o $(NAME) $^
-	$(CC) $(CFLAGS) $(LIB_DIR) $(LIB) -o $(NAME) $^
 	install_name_tool -change libmlx.dylib @executable_path/${MLX_DIR}/libmlx.dylib ${NAME}
+	$(CC) $(CFLAGS) $(LIB_DIR) $(LIB) -o $(NAME) $^
 	touch $@
 
 clean	:
