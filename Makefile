@@ -6,7 +6,7 @@
 #    By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 09:21:03 by jiyunpar          #+#    #+#              #
-#    Updated: 2023/02/03 13:54:21 by junji            ###   ########.fr        #
+#    Updated: 2023/02/03 14:32:17 by junji            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ INIT_M				:=	$(addprefix src/init/, $(addsuffix .c, $(INIT)))
 LAUNCH_GAME			:=	launch_game render_wall key_hook_1 key_hook_2
 LAUNCH_GAME_M		:=	$(addprefix src/launch_game/, $(addsuffix .c, $(LAUNCH_GAME)))
 
-PARSE_MAP			:=	parse
-PARSE_MAP_M			:=	$(addprefix src/parse_map/, $(addsuffix .c, $(PARSE_MAP)))
+PARSE			:=	parse read_except_map_content read_map_content check_valid_map_element create_map fill_empty_location check_surround_by_wall
+PARSE_M			:=	$(addprefix src/parse/, $(addsuffix .c, $(PARSE)))
 
 UTILS				:=	free put_pixel_to_image
 UTILS_M				:=	$(addprefix src/utils/, $(addsuffix .c, $(UTILS)))
@@ -29,7 +29,7 @@ UTILS_M				:=	$(addprefix src/utils/, $(addsuffix .c, $(UTILS)))
 MAIN				:=	main
 MAIN_M				:=	$(addprefix src/, $(addsuffix .c, $(MAIN)))
 
-SRCS				:=	$(PARSE_MAP_M) $(UTILS_M) $(MAIN_M) $(INIT_M) $(LAUNCH_GAME_M)
+SRCS				:=	$(PARSE_M) $(UTILS_M) $(MAIN_M) $(INIT_M) $(LAUNCH_GAME_M)
 
 OBJS				:=	$(SRCS:.c=.o)
 
