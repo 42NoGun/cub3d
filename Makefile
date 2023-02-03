@@ -6,18 +6,18 @@
 #    By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 09:21:03 by jiyunpar          #+#    #+#              #
-#    Updated: 2023/01/31 13:51:54 by jiyunpar         ###   ########.fr        #
+#    Updated: 2023/02/02 18:03:18 by junji            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY : all bonus clean fclean re .all_check
+.PHONY : all bonus clean fclean re
 
 NAME				:=	cub3D
 
 INIT				:=	init_data init_data_utils init_mlx
 INIT_M				:=	$(addprefix src/init/, $(addsuffix .c, $(INIT)))
 
-LAUNCH_GAME			:=	launch_game render_wall
+LAUNCH_GAME			:=	launch_game render_wall key_hook_1 key_hook_2
 LAUNCH_GAME_M		:=	$(addprefix src/launch_game/, $(addsuffix .c, $(LAUNCH_GAME)))
 
 PARSE_MAP			:=	get_array_map_from_file get_map_data
@@ -63,12 +63,12 @@ ifeq ($(DEBUG), 2)
 endif
 
 .all_check	: $(OBJS)
-	make -C $(LIBFT_DIR) re
 	make -C $(MLX_DIR)
-#	@$(CC) $(CFLAGS) $(INCLUDE) $(LIB_DIR) $(LIB) \
+	make -C $(LIBFT_DIR) re
+	@$(CC) $(CFLAGS) $(INCLUDE) $(LIB_DIR) $(LIB) \
 			-framework OpenGL -framework AppKit -o $(NAME) $^
-	$(CC) $(CFLAGS) $(LIB_DIR) $(LIB) -o $(NAME) $^
 	install_name_tool -change libmlx.dylib @executable_path/${MLX_DIR}/libmlx.dylib ${NAME}
+	$(CC) $(CFLAGS) $(LIB_DIR) $(LIB) -o $(NAME) $^
 	touch $@
 
 clean	:
