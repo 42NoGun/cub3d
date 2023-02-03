@@ -6,11 +6,30 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:32:11 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/01/26 20:33:57 by jiyunpar         ###   ########.fr       */
+/*   Updated: 2023/02/03 16:57:26 by hanbkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	free_rest(t_data *data)
+{
+	int	i;
+	
+	i = 0;
+	while (i < 4)
+	{
+		free(data->wall[i].relative_path);
+		//mlx_destroy_image(data->wall[i].image, data->mlx);
+		free(data->wall[i].image);
+		++i;
+	}
+	free(data->wall);
+	free(data->color);
+	free_2d_array_content(data->map->world_map);
+	free(data->map);
+	free(data->player);
+}
 
 void	free_list_node_content(t_list *list)
 {

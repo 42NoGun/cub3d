@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:43:27 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/02/03 14:34:50 by junji            ###   ########.fr       */
+/*   Updated: 2023/02/03 16:06:35 by hanbkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	check_valid_argument(int argc, char *argv[])
 		ft_putendl_fd("usage: mapfile is [mapname.cub]", 2);
 		exit(1);
 	}
+	free_2d_array_content(file_extension);
 }
 
 void	check_duplicate_player(char c, int *dir_flag)

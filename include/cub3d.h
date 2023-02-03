@@ -194,6 +194,7 @@ void	launch_game(t_map_info *map_info);
 /*
  * free.c
  */
+void	free_rest(t_data *data);
 void	free_list_node_content(t_list *list);
 void	free_2d_array_content(char **array);
 

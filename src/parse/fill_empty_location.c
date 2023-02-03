@@ -6,7 +6,7 @@
 /*   By: junji <junji@42seoul.student.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 14:21:50 by junji             #+#    #+#             */
-/*   Updated: 2023/02/03 14:34:12 by junji            ###   ########.fr       */
+/*   Updated: 2023/02/03 16:48:25 by hanbkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,12 @@ static void	bfs(t_queue *queue, t_map_info *map_info)
 static void	visit_empty_location(t_queue *queue, t_map_info *map_info,
 		int i, int j)
 {
-	t_pair	*cur;
+	t_pair	cur;
 
-	cur = ft_calloc(sizeof(t_pair), 1);
 	map_info->map[i][j] = 2;
-	cur->y = i;
-	cur->x = j;
-	queue->push(queue, (void *)(cur));
+	cur.y = i;
+	cur.x = j;
+	queue->push(queue, (void *)(&cur));
 }
 
 void	fill_empty_location(t_map_info *map_info)
@@ -81,4 +80,5 @@ void	fill_empty_location(t_map_info *map_info)
 		}
 		++i;
 	}
+	free(queue.data);
 }
