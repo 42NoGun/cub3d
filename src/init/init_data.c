@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:52:33 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/01/27 11:25:57by jiyunpar         ###   ########.fr       */
+/*   Updated: 2023/02/03 14:05:30 by junji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ static t_map	*init_map(t_list *list)
 	t_map	*map;
 
 	map = _malloc(sizeof(t_map));
-	map->world_map = get_array_map(list);
-	map->width = get_world_map_width(map->world_map);
-	map->height = get_world_map_height(map->world_map);
+	(void)list;
+//	map->world_map = get_array_map(list);
+//	map->width = get_world_map_width(map->world_map);
+//	map->height = get_world_map_height(map->world_map);
 	return (map);
 }
 

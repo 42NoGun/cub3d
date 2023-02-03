@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 16:17:08 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/02/01 09:44:21 by junji            ###   ########.fr       */
+/*   Updated: 2023/02/03 13:42:10 by junji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,8 @@ typedef struct s_map_info
 	char	*south_path;
 	char	*west_path;
 	char	*east_path;
-	int		floor_colors[3];
-	int		ceiling_colors[3];
+	int		floor_color;
+	int		ceiling_color;
 	char	**map;
 	int		width;
 	int		height;

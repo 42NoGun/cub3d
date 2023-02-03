@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:43:27 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/02/01 09:45:03 by junji            ###   ########.fr       */
+/*   Updated: 2023/02/03 14:03:24 by junji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,11 @@ void	check_valid_argument(int argc, char *argv[])
 	}
 }
 
-// void	check_valid_map(char *argv[])
-// {
-
-// }
-
-void	fill_colors(t_map_info *map_info, char *splited, bool is_ceiling)
+void	fill_colors(int *fill_color, char *splited)
 {
 	char	**numbers;
 	int		i;	
+	int		color;
 
 	numbers = ft_split(splited, ',');
 	i = 0;
@@ -50,24 +46,15 @@ void	fill_colors(t_map_info *map_info, char *splited, bool is_ceiling)
 	if (i != 3)
 		ft_terminate("usage: color is three argument");
 	i = -1;
-	if (is_ceiling)
-	{
-		while (++i < 3)
-		{
-			map_info->ceiling_colors[i] = ft_atoi(numbers[i]);
-			if (map_info->ceiling_colors[i] < 0 || map_info->ceiling_colors[i] > 255)
-				ft_terminate("usage: ceiling color range is 0 ~ 255");
-		}
-		return ;
-	}
 	while (++i < 3)
 	{
-		map_info->floor_colors[i] = ft_atoi(numbers[i]);
-		if (map_info->floor_colors[i] < 0 || map_info->floor_colors[i] > 255)
-			ft_terminate("usage: floor color range is 0 ~ 255");
+		*fill_color <<= 8;
+		color = ft_atoi(numbers[i]);
+		if (color < 0 || color > 255)
+			ft_terminate("usage: ceiling color range is 0 ~ 255");
+		*fill_color += color;
 	}
 }
-
 
 void	fill_except_map_content(t_map_info *map_info, char **splited)
 {
@@ -80,9 +67,9 @@ void	fill_except_map_content(t_map_info *map_info, char **splited)
 	else if (!ft_strcmp(splited[0], "EA"))
 		map_info->east_path = ft_strdup(splited[1]);
 	else if (!ft_strcmp(splited[0], "F"))
-		fill_colors(map_info, splited[1], false);
+		fill_colors(&map_info->floor_color, splited[1]);
 	else if (!ft_strcmp(splited[0], "C"))
-		fill_colors(map_info, splited[1], true);
+		fill_colors(&map_info->ceiling_color, splited[1]);
 }
 
 void	check_type_identifier(char **splited)
@@ -102,6 +89,19 @@ void	check_type_identifier(char **splited)
 	ft_terminate("usage: map file element allow (NO SO WE EA F A)\n");
 }
 
+// 1. NO SO WE 만나오고 더 없었을 때 무한루프?
+// 2. 공백을 기준으로 스플릿했을 때 splited2개가 없을 때
+void	check_valid_word_count(char **splited)
+{
+	int		i;
+
+	i = 0;
+	while (splited[i])
+		++i;
+	if (i != 2)
+		ft_terminate("error: type element must have 2 words\n");
+}
+
 void	read_except_map_content(int fd, t_map_info *map_info)
 {
 	char	*line;
@@ -114,9 +114,12 @@ void	read_except_map_content(int fd, t_map_info *map_info)
 		line = get_next_line(fd);
 		if (read_count == 6)
 			break ;
-		if (!line || !ft_strcmp(line, "\n"))
+		if (!line)
+			ft_terminate("error: invalid map\n");
+		if (!ft_strcmp(line, "\n"))
 			continue ;
 		splited = ft_split(line, ' ');
+		check_valid_word_count(splited);
 		check_type_identifier(splited);
 		fill_except_map_content(map_info, splited);
 		free_2d_array_content(splited);
@@ -126,10 +129,8 @@ void	read_except_map_content(int fd, t_map_info *map_info)
 	printf("south:%s\n", map_info->south_path);
 	printf("east:%s\n", map_info->east_path);
 	printf("west:%s\n", map_info->west_path);
-	for	(int idx = 0; idx < 3; ++idx)
-		printf("ceiling:%d\n", map_info->ceiling_colors[idx]);
-	for	(int idx = 0; idx < 3; ++idx)
-		printf("floor:%d\n", map_info->floor_colors[idx]);
+	printf("ceiling:%x\n", map_info->ceiling_color);
+	printf("floor:%x\n", map_info->floor_color);
 }
 
 int	skip_first_new_line(char *line, bool is_first_new_line)
@@ -146,18 +147,21 @@ int	skip_first_new_line(char *line, bool is_first_new_line)
 	return (0);
 }
 
-void	read_map_content(int fd, t_map_info *map_info, t_list *map_line)
+void	read_map_content(int fd, t_map_info *map_info,
+		t_list *map_line, bool is_first_new_line)
 {
 	char	*line;
-	bool	is_first_new_line;
 	int		width;
 
-	is_first_new_line = true;
 	while (true)
 	{
 		line = get_next_line(fd);
 		if (!line)
+		{
+			if (is_first_new_line)
+				ft_terminate("error: map is empty");
 			break ;
+		}
 		if (skip_first_new_line(line, is_first_new_line))
 			continue ;
 		++map_info->height;
@@ -234,7 +238,6 @@ void	create_map(t_map_info *map_info, t_list *map_line)
 		}
 		printf("\n");
 	}
-
 }
 
 void	get_map_from_file(char *argv[], t_map_info *map_info, t_list *map_line)
@@ -247,7 +250,7 @@ void	get_map_from_file(char *argv[], t_map_info *map_info, t_list *map_line)
 	if (fd < 0)
 		ft_terminate("open");
 	read_except_map_content(fd, map_info);
-	read_map_content(fd, map_info, map_line);
+	read_map_content(fd, map_info, map_line, true);
 }
 
 bool	is_player_direction(char c)
@@ -288,14 +291,14 @@ void	check_valid_map_element(t_list *map_line)
 		{
 			if (!(line[i] == ' ' || line[i] == '0' || line[i] == '1'
 					|| is_player_direction(line[i])))
-				ft_terminate(
-					"usage: map content only allowed (' ' 0 1 E W S N)");
+				ft_terminate("usage: map only allowed (' ' 0 1 E W S N)");
 			if (is_player_direction(line[i]))
 				check_duplicate_player(line[i], &dir_flag);
 		}
 		cur_node = cur_node->next;
 	}
-	// free_list_node_content(map_line);
+	if (!dir_flag)
+		ft_terminate("error: player is not exist\n");
 }
 
 void	search_adjacent_vertex(t_queue *queue, t_pair *cur,
@@ -361,7 +364,7 @@ void	fill_empty_location(t_map_info *map_info)
 		{
 			if (map_info->map[i][j] == 0)
 				visit_empty_location(&queue, map_info, i, j);
-			bfs(&queue, map_info);	
+			bfs(&queue, map_info);
 			++j;
 		}
 		++i;
@@ -371,13 +374,13 @@ void	fill_empty_location(t_map_info *map_info)
 void	check_edge_is_empty(t_map_info *map_info, int i, int j)
 {
 	if (i == 0)
-		ft_terminate("usage: edge isn't void");
+		ft_terminate("usage: edge can't exist in void");
 	if (j == 0)
-		ft_terminate("usage: edge isn't void");
+		ft_terminate("usage: edge can't exist in void");
 	if (i == map_info->height - 1)
-		ft_terminate("usage: edge isn't void");
+		ft_terminate("usage: edge can't exist in void");
 	if (j == map_info->width - 1)
-		ft_terminate("usage: edge isn't void");
+		ft_terminate("usage: edge can't exist in void");
 }
 
 void	check_opened_wall(t_map_info *map_info, int i, int j)
@@ -452,6 +455,8 @@ void	parse(int argc, char *argv[], t_map_info *map_info)
 	create_map(map_info, map_line);
 	fill_empty_location(map_info);
 	check_surround_by_wall(map_info);
+	free_list_node_content(map_line);
+
 	int i, j;
 	i = 0;
 	while (i < map_info->height)
