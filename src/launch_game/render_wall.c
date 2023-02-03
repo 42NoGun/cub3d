@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 20:59:53 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/02/01 16:20:19 by jiyunpar         ###   ########.fr       */
+/*   Updated: 2023/02/02 20:16:57 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,11 +157,12 @@ static void	put_texture_line_to_image(t_data *data, t_raycast *cur_state, int x)
 	unsigned int	color;
 
 	step = 1.0 * TEX_HEIGHT / cur_state->line_height;
-	tex_pos = 0.0;
+	tex_pos = (cur_state->draw_start - SCREEN_HEIGHT / 2
+			+ cur_state->line_height / 2) * step;
 	y = cur_state->draw_start;
 	while (y < cur_state->draw_end)
 	{
-		tex_y = (int)tex_pos;
+		tex_y = (int)tex_pos & (TEX_HEIGHT - 1);
 		tex_pos += step;
 		color = get_color_from_texture(data->wall[cur_state->tex_num].image,
 				cur_state, tex_y);

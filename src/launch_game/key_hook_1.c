@@ -6,23 +6,39 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 22:21:56 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/02/01 17:02:39 by jiyunpar         ###   ########.fr       */
+/*   Updated: 2023/02/02 21:57:11 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// void	translate(int keycode, t_data *data)
-// {
-// 	if (keycode == D)
-// 		data->var->x_translate += 10;
-// 	else if (keycode == A)
-// 		data->var->x_translate -= 10;
-// 	else if (keycode == S)
-// 		data->var->y_translate += 10;
-// 	else if (keycode == W)
-// 		data->var->y_translate -= 10;
-// }
+static void	move_dir(int keycode, t_data *data, double dir_x, double dir_y)
+{
+	double	sign;
+	int		x;
+	int		y;
+
+	sign = 0.0;
+	if (keycode == W || keycode == D)
+		sign = 1.0;
+	else if (keycode == S || keycode == A)
+		sign = -1.0;
+	x = (int)(data->player->pos_x + dir_x * 0.5 * sign);
+	y = (int)(data->player->pos_y + dir_y * 0.5 * sign);
+	printf("x : %d, y : %d\n", x, y);
+	if (data->map->world_map[(int)data->player->pos_y][x] != '1')
+		data->player->pos_x += dir_x * 0.5 * sign;
+	if (data->map->world_map[y][(int)data->player->pos_x] != '1')
+		data->player->pos_y += dir_y * 0.5 * sign;
+}
+
+void	translate(int keycode, t_data *data)
+{
+	if (keycode == W || keycode == S)
+		move_dir(keycode, data, data->player->dir_x, data->player->dir_y);
+	else if (keycode == D || keycode == A)
+		move_dir(keycode, data, data->player->plane_x, data->player->plane_y);
+}
 
 void	rotate_z(double *x, double *y, double angle_z)
 {
@@ -38,21 +54,26 @@ void	rotate_z(double *x, double *y, double angle_z)
 void	rotate(int keycode, t_data *data)
 {
 	if (keycode == LEFT)
-		data->player->angle = -M_PI / 180.0;
+	{
+		rotate_z(&data->player->dir_x, &data->player->dir_y, -M_PI / 18.0);
+		rotate_z(&data->player->plane_x, &data->player->plane_y, -M_PI / 18.0);
+	}
 	else if (keycode == RIGHT)
-		data->player->angle = M_PI / 180.0;
-	rotate_z(&data->player->dir_x, &data->player->dir_y, data->player->angle);
-	rotate_z(&data->player->plane_x, &data->player->plane_y, data->player->angle);
+	{
+		rotate_z(&data->player->dir_x, &data->player->dir_y, M_PI / 18.0);
+		rotate_z(&data->player->plane_x, &data->player->plane_y, M_PI / 18.0);
+	}
 }
 
 int	key_hook(int keycode, t_data *data)
 {
-	// if (keycode == D || keycode == A || keycode == S || keycode == W)
-	// 	translate(keycode, data);
-	if (keycode == LEFT || keycode == RIGHT)
+	if (keycode == D || keycode == A || keycode == S || keycode == W)
+		translate(keycode, data);
+	else if (keycode == LEFT || keycode == RIGHT)
 		rotate(keycode, data);
 	else if (keycode == ESC)
 		exit_window(keycode, data);
-	printf("player angle : %f\n", data->player->angle);
+	printf("pos x : %f, pos y : %f\n", data->player->pos_x, data->player->pos_y);
+	printf("dir x : %f, dir y : %f\n", data->player->dir_x, data->player->dir_y);
 	return (0);
 }

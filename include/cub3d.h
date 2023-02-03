@@ -43,10 +43,10 @@ typedef enum e_key
 	D = 2,
 	W = 13,
 	ESC = 53,
-	LEFT = 124,
-	RIGHT = 123,
+	LEFT = 123,
+	RIGHT = 124,
 	OPEN = 33,
-	CLOSE = 30,
+	CLOSE = 30
 }	t_key;
 
 typedef struct s_image
@@ -91,7 +91,6 @@ typedef struct s_player
 	char	init_state;
 	double	pos_x;
 	double	pos_y;
-	double	angle;
 	double	dir_x;
 	double	dir_y;
 	double	plane_x;
