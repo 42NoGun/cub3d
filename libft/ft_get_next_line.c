@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:35:42 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/01/26 17:30:17 by jiyunpar         ###   ########.fr       */
+/*   Updated: 2023/02/03 13:21:36 by junji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static char	*read_file(int fd, char **backup, char *buf)
 
 	while (ft_is_newline(*backup) == -1)
 	{
+		printf("ft_is_new_line()\n");
 		byte = read(fd, buf, BUFFER_SIZE);
 		if (byte == -1)
 			ft_terminate("ERROR : READ");
@@ -102,6 +103,7 @@ char	*get_next_line(int fd)
 	if (!line)
 	{
 		free(backup);
+		backup = NULL;
 		return (NULL);
 	}
 	backup = update_backup(&backup);
