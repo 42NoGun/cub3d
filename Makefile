@@ -6,7 +6,7 @@
 #    By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 09:21:03 by jiyunpar          #+#    #+#              #
-#    Updated: 2023/02/03 11:03:00 by junji            ###   ########.fr        #
+#    Updated: 2023/02/03 11:08:45 by junji            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,8 +67,8 @@ endif
 	make -C $(LIBFT_DIR) re
 	@$(CC) $(CFLAGS) $(INCLUDE) $(LIB_DIR) $(LIB) \
 			-framework OpenGL -framework AppKit -o $(NAME) $^
-	install_name_tool -change libmlx.dylib @executable_path/${MLX_DIR}/libmlx.dylib ${NAME}
 	$(CC) $(CFLAGS) $(LIB_DIR) $(LIB) -o $(NAME) $^
+	install_name_tool -change libmlx.dylib @executable_path/${MLX_DIR}/libmlx.dylib ${NAME}
 	touch $@
 
 clean	:
