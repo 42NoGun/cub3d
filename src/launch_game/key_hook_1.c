@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 22:21:56 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/02/02 21:57:11 by jiyunpar         ###   ########.fr       */
+/*   Updated: 2023/02/03 15:45:37 by hanbkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void	move_dir(int keycode, t_data *data, double dir_x, double dir_y)
 	x = (int)(data->player->pos_x + dir_x * 0.5 * sign);
 	y = (int)(data->player->pos_y + dir_y * 0.5 * sign);
 	printf("x : %d, y : %d\n", x, y);
-	if (data->map->world_map[(int)data->player->pos_y][x] != '1')
+	if (data->map->world_map[(int)data->player->pos_y][x] != 1)
 		data->player->pos_x += dir_x * 0.5 * sign;
-	if (data->map->world_map[y][(int)data->player->pos_x] != '1')
+	if (data->map->world_map[y][(int)data->player->pos_x] != 1)
 		data->player->pos_y += dir_y * 0.5 * sign;
 }
 

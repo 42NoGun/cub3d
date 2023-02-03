@@ -37,6 +37,7 @@ static void	fill_colors(int *fill_color, char *splited)
 
 static void	fill_except_map_content(t_map_info *map_info, char **splited)
 {
+	splited[1][ft_strlen(splited[1]) - 1] = 0;
 	if (!ft_strcmp(splited[0], "NO"))
 		map_info->north_path = ft_strdup(splited[1]);
 	else if (!ft_strcmp(splited[0], "SO"))

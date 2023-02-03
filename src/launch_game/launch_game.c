@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:21:40 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/02/02 15:54:50 by jiyunpar         ###   ########.fr       */
+/*   Updated: 2023/02/03 15:57:52 by hanbkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	render_background(t_data *data)
 static void	render_map(t_data *data)
 {
 	render_background(data);
-	render_wall(data);
+	render_wall_by_raycast(data);
 }
 
 // draw rendered image buffer to screen in current state
@@ -57,8 +57,13 @@ static int	draw_image_to_screen(t_data *data)
 }
 
 //mlx_loop_hook() 사용해서 rendering 하기
-void	launch_game(t_data *data)
+void	launch_game(t_map_info *map_info)
 {
+	t_data	*data;
+	t_mlx	*mlx;
+
+	mlx = init_mlx();
+	data = init_data(map_info, mlx);
 	mlx_loop_hook(data->mlx->display, draw_image_to_screen, data);
 	mlx_key_hook(data->mlx->window, key_hook, data);
 	mlx_hook(data->mlx->window, 17, 0, win_close, data);
