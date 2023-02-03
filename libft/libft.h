@@ -54,11 +54,11 @@ typedef struct s_pair
 	int	x;
 }	t_pair;
 
-void	push(t_queue *Queue, void *value);
-void	pop(t_queue	*Queue);
-bool	empty(t_queue *Queue);
-void	*front(t_queue *Queue);
-void	init_queue(t_queue *queue);
+void	push(t_queue *queue, void *value);
+void	pop(t_queue	*queue);
+bool	empty(t_queue *queue);
+void	*front(t_queue *queue);
+void	init_queue(t_queue *queue, int count, int size);
 
 t_node	*make_node(void *content);
 void	pop_front(t_list *list);
