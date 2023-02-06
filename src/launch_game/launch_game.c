@@ -65,7 +65,7 @@ void	launch_game(t_map_info *map_info)
 	mlx = init_mlx();
 	data = init_data(map_info, mlx);
 	mlx_loop_hook(data->mlx->display, draw_image_to_screen, data);
-	mlx_key_hook(data->mlx->window, key_hook, data);
+	mlx_hook(data->mlx->window, 2, 0, key_hook, data);
 	mlx_hook(data->mlx->window, 17, 0, win_close, data);
 	mlx_loop(data->mlx->display);
 }
