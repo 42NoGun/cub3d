@@ -6,7 +6,7 @@
 /*   By: junji <junji@42seoul.student.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 14:17:05 by junji             #+#    #+#             */
-/*   Updated: 2023/02/03 14:17:58 by junji            ###   ########.fr       */
+/*   Updated: 2023/02/08 17:20:45 by hanbkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,5 @@ void	check_valid_map_element(t_list *map_line)
 		cur_node = cur_node->next;
 	}
 	if (!dir_flag)
-		ft_terminate("error: player is not exist\n");
+		ft_terminate("error: player is not exist");
 }
