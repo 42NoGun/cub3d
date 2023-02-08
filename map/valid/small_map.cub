@@ -1,0 +1,11 @@
+NO ./texture/bluestone.png
+SO ./texture/colorstone.png
+WE ./texture/mossy.png
+EA ./texture/redbrick.png
+
+F 220,100,02
+C 200,225,32
+
+111
+1W1
+111

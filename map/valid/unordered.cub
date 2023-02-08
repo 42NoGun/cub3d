@@ -1,0 +1,16 @@
+SO ./texture/colorstone.png
+NO ./texture/bluestone.png             
+F 220,100,0
+EA ./texture/redbrick.png
+C 200,225,3
+WE ./texture/mossy.png
+
+111111111
+100000001
+100000001
+100000001
+100000001
+1000W0001
+100000001
+100000001
+111111111

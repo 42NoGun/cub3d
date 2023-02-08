@@ -1,0 +1,17 @@
+NO ./texture/bluestone.png
+SO ./texture/colorstone.png
+            
+WE ./texture/colorstone.png
+EA ./texture/colorstone.png 
+F 220,100,0
+C 200,225,1
+
+111111111
+100000001
+100000001
+100000001
+100000001
+1000W0001
+100000001
+100000001
+111111111
