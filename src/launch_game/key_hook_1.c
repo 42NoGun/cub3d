@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 22:21:56 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/02/03 15:45:37 by hanbkim          ###   ########.fr       */
+/*   Updated: 2023/02/08 17:03:02 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,12 @@ static void	move_dir(int keycode, t_data *data, double dir_x, double dir_y)
 		sign = 1.0;
 	else if (keycode == S || keycode == A)
 		sign = -1.0;
-	x = (int)(data->player->pos_x + dir_x * 0.5 * sign);
-	y = (int)(data->player->pos_y + dir_y * 0.5 * sign);
-	printf("x : %d, y : %d\n", x, y);
+	x = (int)(data->player->pos_x + dir_x * 0.51 * sign);
+	y = (int)(data->player->pos_y + dir_y * 0.51 * sign);
 	if (data->map->world_map[(int)data->player->pos_y][x] != 1)
-		data->player->pos_x += dir_x * 0.5 * sign;
+		data->player->pos_x += dir_x * 0.51 * sign;
 	if (data->map->world_map[y][(int)data->player->pos_x] != 1)
-		data->player->pos_y += dir_y * 0.5 * sign;
+		data->player->pos_y += dir_y * 0.51 * sign;
 }
 
 void	translate(int keycode, t_data *data)
@@ -73,7 +72,5 @@ int	key_hook(int keycode, t_data *data)
 		rotate(keycode, data);
 	else if (keycode == ESC)
 		exit_window(keycode, data);
-	printf("pos x : %f, pos y : %f\n", data->player->pos_x, data->player->pos_y);
-	printf("dir x : %f, dir y : %f\n", data->player->dir_x, data->player->dir_y);
 	return (0);
 }
