@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 16:17:08 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/02/03 15:56:24 by hanbkim          ###   ########.fr       */
+/*   Updated: 2023/02/08 17:04:35 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,6 @@ typedef struct s_map_info
 	int		height;
 }	t_map_info;
 
-
-
 /*
  * parse.c
  */
@@ -160,6 +158,11 @@ void	read_map_content(int fd, t_map_info *map_info,
  * read_except_map_content.c
  */
 void	read_except_map_content(int fd, t_map_info *map_info);
+
+/*
+ * fill_except_map_content.c
+ */
+void	fill_except_map_content(t_map_info *map_info, char **splited);
 
 /*
  * check_valid_map_element.c
@@ -224,7 +227,6 @@ void	render_wall_by_raycast(t_data *data);
  * draw_wall_to_image.c
  */
 void	draw_wall_to_image(t_data *data, t_raycast *cur_state, int x);
-
 
 void	put_pixel_to_image(t_image *image, int x, int y, unsigned int color);
 int		key_hook(int keycode, t_data *data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanbkim <hanbkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:45:06 by hanbkim           #+#    #+#             */
-/*   Updated: 2023/02/03 15:45:11 by hanbkim          ###   ########.fr       */
+/*   Updated: 2023/02/08 17:02:52 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	get_player_init_pos(t_player *player, t_map *map)
 		{
 			if (is_dir(map->world_map[y][x]) == true)
 			{
-				printf("y: %d, x: %d\n", y, x);
 				player->init_state = map->world_map[y][x];
 				player->pos_x = (double)x + 0.5;
 				player->pos_y = (double)y + 0.5;

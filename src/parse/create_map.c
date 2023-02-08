@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junji <junji@42seoul.student.kr>           +#+  +:+       +#+        */
+/*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 14:20:20 by junji             #+#    #+#             */
-/*   Updated: 2023/02/03 14:23:56 by junji            ###   ########.fr       */
+/*   Updated: 2023/02/08 17:02:05 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,4 @@ void	create_map(t_map_info *map_info, t_list *map_line)
 	while (++i < map_info->height)
 		map_info->map[i] = ft_calloc(sizeof(char), map_info->width + 1);
 	init_map(map_info, map_line);
-	for (int i = 0; i < map_info->height; i++)
-	{
-		for (int j = 0; j < map_info->width; j++)
-		{
-			printf("%d", map_info->map[i][j]);
-		}
-		printf("\n");
-	}
 }

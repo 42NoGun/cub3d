@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:43:27 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/02/03 16:06:35 by hanbkim          ###   ########.fr       */
+/*   Updated: 2023/02/08 17:03:21 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,4 @@ void	parse(int argc, char *argv[], t_map_info *map_info)
 	fill_empty_location(map_info);
 	check_surround_by_wall(map_info);
 	free_list_node_content(map_line);
-	int i, j;
-	i = 0;
-	while (i < map_info->height)
-	{
-		j = 0;
-		while (j < map_info->width)
-		{
-			printf("%d", map_info->map[i][j]);
-			++j;
-		}
-		printf("\n");
-		++i;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:43:27 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/02/03 14:14:42 by junji            ###   ########.fr       */
+/*   Updated: 2023/02/08 16:59:43 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	read_map_content(int fd, t_map_info *map_info,
 		if (!line)
 		{
 			if (is_first_new_line)
-				ft_terminate("error: map is empty");
+				ft_terminate("map: map is empty");
 			break ;
 		}
 		if (skip_first_new_line(line, is_first_new_line))
