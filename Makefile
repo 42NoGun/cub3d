@@ -6,11 +6,11 @@
 #    By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 09:21:03 by jiyunpar          #+#    #+#              #
-#    Updated: 2023/02/03 15:57:19 by hanbkim          ###   ########.fr        #
+#    Updated: 2023/02/08 17:05:38 by jiyunpar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY : all bonus clean fclean re
+.PHONY : all clean fclean re
 
 NAME				:=	cub3D
 
@@ -20,8 +20,8 @@ INIT_M				:=	$(addprefix src/init/, $(addsuffix .c, $(INIT)))
 LAUNCH_GAME			:=	launch_game render_wall_by_raycast draw_wall_to_image key_hook_1 key_hook_2
 LAUNCH_GAME_M		:=	$(addprefix src/launch_game/, $(addsuffix .c, $(LAUNCH_GAME)))
 
-PARSE			:=	parse read_except_map_content read_map_content check_valid_map_element create_map fill_empty_location check_surround_by_wall
-PARSE_M			:=	$(addprefix src/parse/, $(addsuffix .c, $(PARSE)))
+PARSE				:=	parse read_except_map_content read_map_content check_valid_map_element create_map fill_empty_location check_surround_by_wall fill_except_map_content
+PARSE_M				:=	$(addprefix src/parse/, $(addsuffix .c, $(PARSE)))
 
 UTILS				:=	free put_pixel_to_image
 UTILS_M				:=	$(addprefix src/utils/, $(addsuffix .c, $(UTILS)))
@@ -42,7 +42,7 @@ LIB					= 	-lft -lmlx
 
 INCLUDE				=	-I./include -I$(MLX_DIR) -I$(LIBFT_DIR)
 
-CFLAGS				=	-Wall -Wextra -Werror -g3
+CFLAGS				=	-Wall -Wextra -Werror
 
 %.o : %.c
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
