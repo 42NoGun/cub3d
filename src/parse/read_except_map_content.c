@@ -3,55 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   read_except_map_content.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junji <junji@42seoul.student.kr>           +#+  +:+       +#+        */
+/*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 14:16:05 by junji             #+#    #+#             */
-/*   Updated: 2023/02/03 16:18:46 by hanbkim          ###   ########.fr       */
+/*   Updated: 2023/02/08 17:03:31 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	fill_colors(int *fill_color, char *splited)
-{
-	char	**numbers;
-	int		i;	
-	int		color;
-
-	numbers = ft_split(splited, ',');
-	i = 0;
-	while (numbers[i])
-		++i;
-	if (i != 3)
-		ft_terminate("usage: color is three argument");
-	i = -1;
-	while (++i < 3)
-	{
-		*fill_color <<= 8;
-		color = ft_atoi(numbers[i]);
-		if (color < 0 || color > 255)
-			ft_terminate("usage: ceiling color range is 0 ~ 255");
-		*fill_color += color;
-	}
-	free_2d_array_content(numbers);
-}
-
-static void	fill_except_map_content(t_map_info *map_info, char **splited)
-{
-	splited[1][ft_strlen(splited[1]) - 1] = 0;
-	if (!ft_strcmp(splited[0], "NO"))
-		map_info->north_path = ft_strdup(splited[1]);
-	else if (!ft_strcmp(splited[0], "SO"))
-		map_info->south_path = ft_strdup(splited[1]);
-	else if (!ft_strcmp(splited[0], "WE"))
-		map_info->west_path = ft_strdup(splited[1]);
-	else if (!ft_strcmp(splited[0], "EA"))
-		map_info->east_path = ft_strdup(splited[1]);
-	else if (!ft_strcmp(splited[0], "F"))
-		fill_colors(&map_info->floor_color, splited[1]);
-	else if (!ft_strcmp(splited[0], "C"))
-		fill_colors(&map_info->ceiling_color, splited[1]);
-}
 
 static void	check_type_identifier(char **splited)
 {
@@ -67,7 +26,7 @@ static void	check_type_identifier(char **splited)
 		return ;
 	if (!ft_strcmp(splited[0], "C") || !ft_strcmp(splited[1], "C"))
 		return ;
-	ft_terminate("usage: map file element allow (NO SO WE EA F A)\n");
+	ft_terminate("usage: map file element allow (NO SO WE EA F A)");
 }
 
 static void	check_valid_word_count(char **splited)
@@ -78,7 +37,25 @@ static void	check_valid_word_count(char **splited)
 	while (splited[i])
 		++i;
 	if (i != 2)
-		ft_terminate("error: type element must have 2 words\n");
+		ft_terminate("map: invalid map");
+}
+
+static void	remove_newline(char *line)
+{
+	const int	len = ft_strlen(line);
+
+	if (line[len - 1] == '\n')
+		line[len - 1] = '\0';
+}
+
+static bool	skip_new_line(char *line)
+{
+	if (!ft_strcmp(line, "\n"))
+	{
+		free(line);
+		return (true);
+	}
+	return (false);
 }
 
 void	read_except_map_content(int fd, t_map_info *map_info)
@@ -94,12 +71,10 @@ void	read_except_map_content(int fd, t_map_info *map_info)
 			break ;
 		line = get_next_line(fd);
 		if (!line)
-			ft_terminate("error: invalid map\n");
-		if (!ft_strcmp(line, "\n"))
-		{
-			free(line);
+			ft_terminate("map: invalid map");
+		if (skip_new_line(line))
 			continue ;
-		}
+		remove_newline(line);
 		splited = ft_split(line, ' ');
 		check_valid_word_count(splited);
 		check_type_identifier(splited);
@@ -108,10 +83,4 @@ void	read_except_map_content(int fd, t_map_info *map_info)
 		++read_count;
 		free(line);
 	}
-	printf("north:%s\n", map_info->north_path);
-	printf("south:%s\n", map_info->south_path);
-	printf("east:%s\n", map_info->east_path);
-	printf("west:%s\n", map_info->west_path);
-	printf("ceiling:%x\n", map_info->ceiling_color);
-	printf("floor:%x\n", map_info->floor_color);
 }
