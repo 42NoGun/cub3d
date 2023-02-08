@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:32:11 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/02/03 16:57:26 by hanbkim          ###   ########.fr       */
+/*   Updated: 2023/02/08 15:05:30 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 void	free_rest(t_data *data)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < 4)
 	{
 		free(data->wall[i].relative_path);
-		//mlx_destroy_image(data->wall[i].image, data->mlx);
+		mlx_destroy_image(data->mlx->display, data->wall[i].image->img);
 		free(data->wall[i].image);
 		++i;
 	}
