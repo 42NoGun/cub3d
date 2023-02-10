@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:21:40 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/02/03 15:57:52 by hanbkim          ###   ########.fr       */
+/*   Updated: 2023/02/10 13:09:21 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static int	draw_image_to_screen(t_data *data)
 	return (0);
 }
 
-//mlx_loop_hook() 사용해서 rendering 하기
 void	launch_game(t_map_info *map_info)
 {
 	t_data	*data;

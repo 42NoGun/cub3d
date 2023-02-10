@@ -6,7 +6,7 @@
 /*   By: jiyunpar <jiyunpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 16:17:08 by jiyunpar          #+#    #+#             */
-/*   Updated: 2023/02/08 17:04:35 by jiyunpar         ###   ########.fr       */
+/*   Updated: 2023/02/10 13:09:07 by jiyunpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@
 # define SCREEN_HEIGHT	480
 # define TEX_WIDTH	64
 # define TEX_HEIGHT	64
-# define NO "./texture/bluestone.png"
-# define SO "./texture/colorstone.png"
-# define WE "./texture/eagle.png"
-# define EA "./texture/greystone.png"
 
 typedef struct s_image		t_image;
 typedef struct s_map		t_map;
