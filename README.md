@@ -13,14 +13,13 @@ Ray casting을 이용하여 3D 프로그램을 만든 프로젝트입니다.
 
 Apple clang version 12.0.0 (clang-1200.0.32.28)  
 GNU Make 3.81  
-GNU readline 8.2.1  
 
 1. 저장소를 복제합니다.
 
-        https://github.com/42NoGun/Minishell.git
+        https://github.com/42NoGun/cub3d.git
 2. 컴파일 후 실행합니다.
 
-        cd cub3D && make && ./cub3D map/valid/{map name}
+        cd cub3d && make && ./cub3D map/valid/{map name}
 
 
 ## 3. 동작 원리
