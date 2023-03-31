@@ -1,6 +1,29 @@
 # cub3d
+![cub](cubimg.png)
+## 1. 소개
+Ray casting을 이용하여 3D 프로그램을 만든 프로젝트입니다.
+프로그램 조작 방법은 다음과 같습니다.
+1. W A S D [방향키]
+2. → ← ↑ ↓  [카메라 시점 전환]
+3. esc [프로그램 종료]
 
-## 스케치
+
+## 2. 설치 및 실행  
+본 프로젝트는 다음과 같은 환경에서 작성 되었습니다.
+
+Apple clang version 12.0.0 (clang-1200.0.32.28)  
+GNU Make 3.81  
+GNU readline 8.2.1  
+
+1. 저장소를 복제합니다.
+
+        https://github.com/42NoGun/Minishell.git
+2. 컴파일 후 실행합니다.
+
+        cd cub3D && make && ./cub3D map/valid/{map name}
+
+
+## 3. 동작 원리
 - 텍스쳐가 없는 벽면 레이케스트
 1. parse map
   - 파일에서 게임 실행에 필요한 정보를 읽어 들여서 적절한 자료구조에 정보를 저장
